@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(p)
+@RequestMapping("/almo-sys/produtos")
 public class ProdutosController {
 
     @Autowired
@@ -29,8 +29,12 @@ public class ProdutosController {
         return service.listar();
     }
     @GetMapping("/{id}")
-    public Produtos obterPorId(@PathVariable("id")Integer id){
-        return service.obterPorId(id);
+    public ResponseEntity<?> obterPorId(@PathVariable("id")Integer id){
+        try {
+            return ResponseEntity.ok(service.obterPorId(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado!");
+        }
     }
 
 

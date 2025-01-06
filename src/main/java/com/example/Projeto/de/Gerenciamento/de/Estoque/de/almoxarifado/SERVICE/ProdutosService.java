@@ -2,6 +2,8 @@ package com.example.Projeto.de.Gerenciamento.de.Estoque.de.almoxarifado.SERVICE;
 import com.example.Projeto.de.Gerenciamento.de.Estoque.de.almoxarifado.MODELS.Produtos;
 import com.example.Projeto.de.Gerenciamento.de.Estoque.de.almoxarifado.REPOSITORY.ProdutosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class ProdutosService {
         return produtosRepository.findAll();
     }
     public Produtos obterPorId(Integer id){
-        return produtosRepository.findById(id).orElse(null);
+        return produtosRepository.findById(id).orElseThrow();
     }
     public void deletar(Integer id){
         produtosRepository.deleteById(id);
